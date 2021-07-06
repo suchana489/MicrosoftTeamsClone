@@ -149,8 +149,33 @@ const setMuteButton = () => {
   <span>Mute</span>`;
   document.getElementById("muteButton").innerHTML = html;
 };
+
+const leaveMeeting = () => {
+  console.log('leave meeting')
+  const video = document.querySelector('video');
+
+  // A video's MediaStream object is available through its srcObject attribute
+  const mediaStream = video.srcObject;
+
+  // Through the MediaStream, you can get the MediaStreamTracks with getTracks():
+  const tracks = mediaStream.getTracks();
+
+  // Tracks are returned as an array, so if you know you only have one, you can stop it with: 
+  tracks[0].stop();
+
+  // Or stop all like so:
+  tracks.forEach(track => track.stop())
+  window.close();
+  setStopVideo()
+  setMuteButton()
+  document.querySelector('video').innerHTML = html;
+}
 const setLeaveMeeting = () => {
-  const html = ` <i class="fa-leave-call"></i>
-  <span class="">Leave Meeting</span>`;
-  document.getElementById("leaveMeeting").innerHTML = html;
+  const html = `<i class=" fa-fa-times"></i>
+              <span class="">.main__leave_meeting</span>`;
+  document.getElementById(".main__leave_meeting").innerHTML = html;
 };
+function close_window() {
+  window.close();
+  console.log("close_window");
+  }
