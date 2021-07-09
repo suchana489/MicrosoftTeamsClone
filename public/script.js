@@ -224,7 +224,7 @@ const shareScreen = async () => {
   const myPeer = new Peer(undefined, {
     path: '/peerjs',
     host: '/',
-    port: '3000'
+    port: 'process.env.PORT'00
   })
 const myVideo2 = document.createElement('video')
 myVideo2.muted = true;
