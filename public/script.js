@@ -9,7 +9,7 @@ myVideo.muted = true;
 var peer = new Peer(undefined, {
   path: "/peerjs",
   host: "localhost",
-  port: "process.env.PORT"||"58747",
+  port: "process.env.PORT",
 });
 
 let myVideoStream;
@@ -224,7 +224,7 @@ const shareScreen = async () => {
   const myPeer = new Peer(undefined, {
     path: '/peerjs',
     host: 'localhost',
-    port: 'process.env.PORT'||'58747'
+    port: 'process.env.PORT'
   })
 const myVideo2 = document.createElement('video')
 myVideo2.muted = true;
