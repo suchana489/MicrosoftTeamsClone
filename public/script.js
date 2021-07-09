@@ -146,11 +146,11 @@ const setUnmuteButton = () => {
 };
 const setMuteButton = () => {
   const html = `<i class="fa fa-microphone"></i>
-  <span>Mute</span>`;
+  <span class="">Mute</span>`;
   document.getElementById("muteButton").innerHTML = html;
 };
 
-const leaveMeeting = () => {
+/*const leaveMeeting = () => {
   console.log('leave meeting')
   const video = document.querySelector('video');
 
@@ -160,8 +160,7 @@ const leaveMeeting = () => {
   // Through the MediaStream, you can get the MediaStreamTracks with getTracks():
   const tracks = mediaStream.getTracks();
 
-  // Tracks are returned as an array, so if you know you only have one, you can stop it with: 
-  tracks[0].stop();
+
 
   // Or stop all like so:
   tracks.forEach(track => track.stop())
@@ -170,12 +169,127 @@ const leaveMeeting = () => {
   setMuteButton()
   document.querySelector('video').innerHTML = html;
 }
+
 const setLeaveMeeting = () => {
   const html = `<i class=" fa-fa-times"></i>
               <span class="">.main__leave_meeting</span>`;
   document.getElementById(".main__leave_meeting").innerHTML = html;
+};*/
+/*const shareScreen = () => {
+  // @ts-ignore
+  navigator.mediaDevices.getDisplayMedia({
+    video: {
+      cursor: 'always'
+    },
+    audio: {
+      echoCancellation: true,
+      noiseSuppression: true
+    }
+  }).then(stream => {
+    const videoTrack = stream.getVideoTracks()[0];
+    videoTrack.onended = () => {
+      this.stopScreenShare();
+    };
+
+    const sender = this.currentPeer.getSenders().find(s => s.track.kind === videoTrack.kind);
+    sender.replaceTrack(videoTrack);
+  }).catch(err => {
+    console.log('Unable to get display media ' + err);
+  });
+}
+const stopScreenShare = () => {
+  const videoTrack = this.lazyStream.getVideoTracks()[0];
+  const sender = this.currentPeer.getSenders().find(s => s.track.kind === videoTrack.kind);
+  sender.replaceTrack(videoTrack);
+}
+const setShareScreen = () => {
+  const html = `<i class="u"></i>
+  <span class="unmute">Resume Video</span>`;
+  document.getElementById("playPauseVideo").innerHTML = html;
 };
+
+const setStopShareScreen = () => {
+  const html = `<i class=" fa fa-video-camera"></i>
+  <span class="">Pause Video</span>`;
+  document.getElementById("playPauseVideo").innerHTML = html;
+};
+*/
+const shareScreen = async () => {
+
+
+
+
+  const socket = io('/')
+  
+  const myPeer = new Peer(undefined, {
+    path: '/peerjs',
+    host: '/',
+    port: '3000'
+  })
+const myVideo2 = document.createElement('video')
+myVideo2.muted = true;
+const peers = {}
+navigator.mediaDevices.getDisplayMedia({
+  video: true,
+  audio: true
+}).then(stream => {
+  myVideoStream = stream;
+  addVideoStream(myVideo2, stream)
+  myPeer.on('call', call => {
+    call.answer(stream)
+    const video2 = document.createElement('video')
+    call.on('stream', userVideoStream => {
+      addVideoStream(video2, userVideoStream)
+    })
+  })
+
+  socket.on('user-connected', userId => {
+    connectToNewUser(userId, stream)
+  })
+  
+
+})
+
+socket.on('user-disconnected', userId => {
+  if (peers[userId]) peers[userId].close()
+})
+
+myPeer.on('open', id => {
+  socket.emit('join-room', ROOM_ID, id)
+})
+
+function connectToNewUser(userId, stream) {
+  
+  const call = myPeer.call(userId, stream)
+  const video2 = document.createElement('video')
+  call.on('stream', userVideoStream => {
+    
+  })
+  call.on('close', () => {
+    video2.remove()
+  })
+
+  peers[userId] = call
+}
+
+function addVideoStream(video2, stream) {
+  video2.srcObject = stream
+  video2.addEventListener('loadedmetadata', () => {
+    video2.play()
+  })
+  videoGrid.append(video2)
+}
+}
+
+
 function close_window() {
   window.close();
   console.log("close_window");
+  }
+
+  function shareScreene()
+  {
+  
+   
+  
   }
