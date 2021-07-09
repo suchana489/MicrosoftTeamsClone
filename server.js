@@ -47,7 +47,7 @@ const { v4: uuidV4 } = require('uuid')
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use('/peerjs', peerServer);
-app.get('/', (req, res) => {
+app.ge', (req, res) => {
   res.redirect(`/${uuidV4()}`)
 })
 
