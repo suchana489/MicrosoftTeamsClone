@@ -7,7 +7,7 @@ const myVideo = document.createElement("video");
 myVideo.muted = true;
 
 var peer = new Peer(undefined, {
-  path: '/MicrosoftTeamsClone',
+  path: '/teams-clone-489',
   host: 'localhost',
   port: 3000,
 });
@@ -222,7 +222,7 @@ const shareScreen = async () => {
   const socket = io('/')
   
   const myPeer = new Peer(undefined, {
-   path: '/MicrosoftTeamsClone',
+   path: '/teams-clone-489',
   host: 'localhost',
   port: 3000,
   })
