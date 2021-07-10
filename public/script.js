@@ -7,9 +7,9 @@ const myVideo = document.createElement("video");
 myVideo.muted = true;
 
 var peer = new Peer(undefined, {
-  path: "/peerjs",
-  host: "'peerjs-server.herokuapp.com'",
-  port: "process.env.PORT",
+  path: '/MicrosoftTeamsClone',
+  host: 'localhost',
+  port: 3000,
 });
 
 let myVideoStream;
