@@ -1,4 +1,4 @@
-/*const express = require('express')
+const express = require('express')
 const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
@@ -28,9 +28,9 @@ io.on('connection', socket => {
   })
 })
 
-server.listen(3000)*/
+server.listen(3000)
 
-const express = require('express')
+/*const express = require('express')
 const app = express()
 // const cors = require('cors')
 // app.use(cors())
